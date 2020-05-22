@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import os
 
-img_width, img_height = 300//4, 200//4
+img_width, img_height = 300//2, 200//2
 
 def preprocessing(img_name = None, i = None):
     # print(img_name, i)
@@ -21,6 +21,7 @@ def preprocessing(img_name = None, i = None):
     hsvImg = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     binaryImg = cv2.inRange(hsvImg, min_HSV, max_HSV)
     masked = cv2.bitwise_and(img, img, mask=binaryImg)
+
     result = cv2.cvtColor(masked, cv2.COLOR_BGR2GRAY)
     result = cv2.resize(result, (img_width, img_height))
     result = np.expand_dims(result, axis=2)
@@ -49,6 +50,8 @@ model.compile(loss='binary_crossentropy',
 print(model.summary())
 
 iTrain = 0
+trueThings = 0
+total = 0
 for dir in dirTest:
     for file in dir:
         newImage = preprocessing(file, iTrain)
@@ -56,5 +59,12 @@ for dir in dirTest:
         newImage = np.array(newImage)
         predict = model.predict_classes(newImage)
         print(file, ' is ', iTrain, ' predicted as ', predict)
+        if iTrain == predict:
+            trueThings+=1
+            total+=1
+        else:
+            total+=1
 
     iTrain+=1
+
+print('persentase benar = ', (trueThings/total)*100)
