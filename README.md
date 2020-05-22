@@ -12,3 +12,4 @@ File ini memuat program testing pada model hasil training. Dan juga memuat modul
 ### Razif_Dicoding_Submission.ipynb
 Ini merupakan file submission yang dibuat pada google colab. Hasil dari file ini adalah model training dengan : loss: 0.0455 - accuracy: 0.9850 - val_loss: 0.0311 - val_accuracy: 0.9617 waktu trainingnya 13.25 menit.
 
+Note : Karena terbatasnya kuota internet pada saat ini di submit, untuk file training dan contoh modelnya akan di upload kemudian
